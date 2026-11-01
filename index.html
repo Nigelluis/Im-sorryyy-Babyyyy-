@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tom & Savanna</title>
+  <style>
+    :root {
+      --sky: #8edbff;
+      --sky-deep: #5aa5ff;
+      --pink: #ff8ad9;
+      --pink-deep: #ff5ca7;
+      --purple: #7d6dff;
+      --gold: #ffd166;
+      --text: #2d2241;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, var(--sky) 0%, #dcf7ff 35%, #ffeaf7 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.23);
+      filter: blur(2px);
+      animation: floatBubble 8s ease-in-out infinite alternate;
+    }
+
+    .bubble.one { width: 150px; height: 150px; left: 7%; top: 12%; }
+    .bubble.two { width: 210px; height: 210px; right: 8%; top: 16%; animation-delay: 1.2s; }
+    .bubble.three { width: 120px; height: 120px; left: 12%; bottom: 10%; animation-delay: 2.4s; }
+    .bubble.four { width: 140px; height: 140px; right: 18%; bottom: 8%; animation-delay: 3.1s; }
+
+    @keyframes floatBubble {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-20px) scale(1.08); }
+    }
+
+    .scene {
+      position: relative;
+      z-index: 2;
+      width: min(980px, 92vw);
+      margin: 50px auto;
+      padding: 10px 0;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.76);
+      backdrop-filter: blur(12px);
+      border: 3px solid rgba(255,255,255,0.9);
+      border-radius: 34px;
+      box-shadow: 0 28px 80px rgba(54, 37, 77, 0.22);
+      padding: 28px 28px 32px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 25px rgba(255, 90, 165, 0.28);
+    }
+
+    .characters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    .name {
+      font-size: clamp(2.4rem, 5vw, 4.7rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .heart {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .subtitle {
+      margin: 18px auto 22px;
+      max-width: 780px;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      line-height: 1.8;
+      color: #4d3f66;
+      font-weight: 600;
+    }
+
+    .message-box {
+      background: rgba(255,255,255,0.58);
+      border: 2px solid rgba(124,110,255,0.12);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: left;
+    }
+
+    .hearts {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.35rem;
+      margin-bottom: 14px;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .message {
+      font-size: clamp(1.08rem, 2vw, 1.5rem);
+      line-height: 1.9;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .message p {
+      margin: 0 0 16px 0;
+    }
+
+    .message strong {
+      color: #5a42db;
+    }
+
+    .highlight {
+      color: #f25ca8;
+      font-weight: 800;
+    }
+
+    .button-row {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      box-shadow: 0 15px 30px rgba(86, 67, 146, 0.15);
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+      color: white;
+    }
+
+    .secondary {
+      background: linear-gradient(135deg, var(--sky), var(--sky-deep));
+      color: white;
+    }
+
+    .extra {
+      display: none;
+      margin-top: 22px;
+      text-align: left;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.9;
+      background: rgba(255,255,255,0.52);
+      border: 2px solid rgba(96,169,255,0.12);
+      border-radius: 18px;
+      padding: 18px 16px;
+      color: #48355b;
+    }
+
+    .extra.show {
+      display: block;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f45bb3;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 20px 16px 24px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble one"></div>
+  <div class="bubble two"></div>
+  <div class="bubble three"></div>
+  <div class="bubble four"></div>
+
+  <div class="scene">
+    <div class="card">
+      <div class="badge">Tom & Angela Vibes</div>
+
+      <div class="characters">
+        <div class="name">Tom</div>
+        <div class="heart">💖</div>
+        <div class="name">Savanna</div>
+      </div>
+
+      <p class="subtitle">
+        Savanna, my love, I know I hurt you and I’m truly sorry. I hope this little page shows just how much I care.
+      </p>
+
+      <div class="message-box">
+        <div class="hearts">💞💗💖</div>
+
+        <div class="message">
+          <p><strong>Hallooooo Babyyyy :((</strong></p>
+
+          <p>If you think ive been chilling the entire time or i just dont caree thaz wrong pooo :(</p>
+
+          <p>Ill always express how much I love youu even with the smallest things.</p>
+
+          <p>Anyways Loveee, Im so sorryyy po for acting like i didnt care or i just didnt tell you the things that could be easily solved but yk i care the most po :(</p>
+
+          <p>and i dont know what i would do in my life without youu.</p>
+
+          <p>I shouldve told you how i felt during that timee, and Love i would cryyy an infinite amount of times if i knew you randomly disappeared in my life :(</p>
+
+          <p>I LOVE YOU SO MUCH that i know all of this is not even .1% of me saying how much i really Love you.</p>
+
+          <p>when you came in my life i became the happiesttt boy aliveee.</p>
+
+          <p>i hopee you find this small thing i made cutee and you know i dont patalo</p>
+
+          <p>Love and again IM SORRY MI BABY :(</p>
+
+          <p><span class="highlight">I LOVE YOUUU TO INFINITY AND BEYOND</span></p>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="primary" onclick="showExtra()">Read More</button>
+        <button class="secondary" onclick="changeMood()">Change Mood</button>
+      </div>
+
+      <div id="extra" class="extra">
+        Savanna, you are my peace, my happiness, and my favorite person in the world. I’m sorry for every hard moment, every silence, and every time I made you doubt my love. But I want you to know my love for you is real, deep, and true. I’m learning, I’m growing, and I’m trying to be better for you. You mean everything to me.
+      </div>
+
+      <div class="footer">I Love You, Savanna. I’m Sorry.</div>
+    </div>
+  </div>
+
+  <script>
+    function showExtra() {
+      const extra = document.getElementById("extra");
+      extra.classList.toggle("show");
+    }
+
+    function changeMood() {
+      document.body.style.background = "linear-gradient(180deg, #f7d7ff 0%, #ffe1f2 35%, #dfeaff 100%)";
+    }
+  </script>
+</body>
+</html>
